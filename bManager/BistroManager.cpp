@@ -97,7 +97,14 @@ void BistroManager::dodaZamowienie() {
 	int wybor;  //usr in
 	while (true) {
 		cout << "Podaj ID (0 - konczy wybor, -1 cofa): ";
-		cin >> wybor;
+
+		if (!(cin >> wybor)) { // walidacja wejscia i obsluga bledow cin
+			cout << "Blad! Wprowadz numer ID, 0 lub -1.\n";
+			cin.clear(); // Resetuje flagi b³êdu (np. failbit)
+			cin.ignore(1000, '\n'); // Czyœci bufor wejœcia do koñca linii
+			continue; // Ponowne rozpoczêcie pêtli
+		}
+
 		if (wybor == 0) break;
 		if (wybor == -1) {
 			if (!stosWyboru.empty()) { // walidacja - nie mo¿na usun¹æ 'niczego;
