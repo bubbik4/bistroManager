@@ -12,31 +12,29 @@ protected:
 
 public:
 	PozycjaMenu(string n, double c, int t);
-	virtual ~PozycjaMenu() = 0;
+	virtual ~PozycjaMenu() {};
 
-	virtual void wyswietl() = 0;
+	virtual void wyswietl() const = 0;
 
 	// GETr
 	string getNazwa() const { return nazwa; }
-	double getCena() const { return cena };
+	double getCena() const { return cena; }
 	int getCzas() const { return czasPrzygotowania; }
 
 };
 
 // -- KLASY POCHODNE -- //
 
-class DanieGlowne
-	: public PozycjaMenu {
+class DanieGlowne : public PozycjaMenu {
 public:
 	DanieGlowne(string n, double c, int t);
-	void wyswietl() const override;
+	virtual void wyswietl() const override;
 };
 
-class Napoj
-	: public PozycjaMenu {
+class Napoj : public PozycjaMenu {
 private:
 	bool zLodem;
 public:
 	Napoj(string n, double c, int t, bool i = false);
-	void wyswietl() const override;
+	virtual void wyswietl() const override;
 };

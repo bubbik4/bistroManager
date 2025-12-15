@@ -6,8 +6,16 @@ PozycjaMenu::PozycjaMenu(string n, double c, int t) {
 	czasPrzygotowania = t;
 }
 
-PozycjaMenu::DanieGlowne(string n, double c, int t)
+DanieGlowne::DanieGlowne(string n, double c, int t)
 	: PozycjaMenu(n, c, t) {}
 
-PozycjaMenu::Napoj(string n, double c, int t, bool i)
-	: PozycjaMenu(n, c, t), zLodem(i); {}
+void DanieGlowne::wyswietl() const {
+	cout << "[DANIE] " << nazwa << " " << cena << " PLN\n";
+}
+
+Napoj::Napoj(string n, double c, int t, bool i)
+	: PozycjaMenu(n, c, t), zLodem(i) {}
+
+void Napoj::wyswietl() const {
+	cout << "[NAPOJ]" << nazwa << " " << cena << " PLN" << (zLodem ? " z lodem" : "") << endl;
+}
