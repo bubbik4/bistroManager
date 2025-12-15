@@ -10,12 +10,12 @@ DanieGlowne::DanieGlowne(string n, double c, int t)
 	: PozycjaMenu(n, c, t) {}
 
 void DanieGlowne::wyswietl() const {
-	cout << "[DANIE] " << nazwa << " " << cena << " PLN\n";
+	cout << "[DANIE] " << nazwa << " | " << cena << " PLN\n";
 }
 
 Napoj::Napoj(string n, double c, int t, bool i)
 	: PozycjaMenu(n, c, t), zLodem(i) {}
 
 void Napoj::wyswietl() const {
-	cout << "[NAPOJ]" << nazwa << " " << cena << " PLN" << (zLodem ? " z lodem" : "") << endl;
+	cout << "[NAPOJ] " << nazwa << " " << (zLodem ? "z lodem | " : "| ") << cena << " PLN" << endl;
 }

@@ -67,15 +67,16 @@ void BistroManager::dodaZamowienie() {
 	int r, k; // rz¹d, kolumna
 	cout << "Podaj numer stolika (1-5)\nRzad: ";
 	cin >> r;
-	cout << "\nKolumna: ";
+	cout << "Kolumna: ";
 	cin >> k;
 
-	if (sala[r-1][k-1]) { // r-1 i k-1, dlatego, ¿e user podaje zakres 1-5, 
-						  // a tablica ma zakres 0-4
-		cout << "Miejsce jest zajete!\n";
-		return;
-	} else if (r >= 6 || r < 1 || k >= 6 || k < 1) {
+	if (r < 1 || r > 5 || k < 1 || k > 5) {
 		cout << "Miejsce poza zakresem (1-5).\n";
+		return;
+	}
+
+	if (sala[r - 1][k - 1]) {
+		cout << "Miejsce jest zajete!\n";
 		return;
 	}
 	
@@ -102,6 +103,10 @@ void BistroManager::dodaZamowienie() {
 			if (!stosWyboru.empty()) { // walidacja - nie mo¿na usun¹æ 'niczego;
 				cout << "Cofnieto: " << stosWyboru.top()->getNazwa() << endl;
 				stosWyboru.pop();
+				continue;
+			}
+			else {
+				cout << "Brak pozycji do usuniecia!\n";
 				continue;
 			}
 		}
@@ -173,6 +178,11 @@ void BistroManager::wystawRachunek() {
 	cout << "\nKolumna: ";
 	cin >> k;
 
+	if (r < 1 || r > 5 || k < 1 || k > 5) {
+		cout << "Miejsce poza zakresem (1-5).\n";
+		return;
+	}
+
 	int numerStolika = r * 10 + k;
 	if (gotoweZamowienia.find(numerStolika) == gotoweZamowienia.end()) {
 		cout << "Nie ma zamowienia dla stolika " << numerStolika << endl;
@@ -184,10 +194,10 @@ void BistroManager::wystawRachunek() {
 	double suma = 0.0;
 	
 	for (auto* pos : z.listaPozycji) {
-		cout << pos->getNazwa() << "\t" << pos->getCena() << " PLN\n";
+		cout << pos->getNazwa() << " | " << pos->getCena() << " PLN\n";
 		suma += pos->getCena();
 	}
-	cout << "RABAT: Dla jakiego 'n', wyra¿enie n! = 120?\n";
+	cout << "RABAT: Dla jakiego 'n', wyrazenie n! = 120?\nn = ";
 	int n;
 	cin >> n;
 	if (silnia(n) == 120) {
