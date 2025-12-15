@@ -42,7 +42,7 @@ void BistroManager::pokazSale() {
 
 void BistroManager::dodaZamowienie() { 
 	int r, k; // rz¹d, kolumna
-	cout << "Podaj numer stolika\nRzad: ";
+	cout << "Podaj numer stolika (1-5)\nRzad: ";
 	cin >> r;
 	cout << "\nKolumna: ";
 	cin >> k;
@@ -141,4 +141,56 @@ void BistroManager::panelKuchni() {
 	gotoweZamowienia[doRealizacji.numerStolika] = doRealizacji;
 	cout << "Zamowienie dla stolika " << doRealizacji.numerStolika << " jest gotowe!";
 
+}
+
+long long BistroManager::silnia(int n) {
+	if (n <= 1) return 1;
+	return n * silnia(n - 1);
+}
+
+void BistroManager::wystawRachunek() {
+	int r, k; // rz¹d, kolumna
+	cout << "Podaj numer stolika (1-5)\nRzad: ";
+	cin >> r;
+	cout << "\nKolumna: ";
+	cin >> k;
+
+	int numerStolika = r * 10 + k;
+	if (gotoweZamowienia.find(numerStolika) == gotoweZamowienia.end()) {
+		cout << "Nie ma zamowienia dla stolika " << numerStolika << endl;
+		return;
+	}
+	
+	Zamowienie &z = gotoweZamowienia[numerStolika];
+
+	double suma = 0.0;
+	
+	for (auto* pos : z.listaPozycji) {
+		cout << pos->getNazwa() << "\t" << pos->getCena() << " PLN\n";
+		suma += pos->getCena();
+	}
+	cout << "RABAT: Dla jakiego 'n', wyra¿enie n! = 120?\n";
+	int n;
+	cin >> n;
+	if (silnia(n) == 120) {
+		cout << "Gratulacje! Zyskujesz rabat 10%!\n";
+		suma *= 0.90;
+	} else {
+		cout << "Nie tym razem | brak znizki.\n";
+	}
+
+	cout << "Razem: " << fixed << setprecision(2) << suma << " PLN\n";
+	string filename = "rachunek_stolik_" + to_string(numerStolika) + ".txt";
+	ofstream plik(filename);
+	if (plik.is_open()) {
+		auto now = system_clock::to_time_t(system_clock::now());
+		plik << "RACHUNEK\nData: " << ctime(&now);
+		plik << "Stolik: " << numerStolika << endl;
+		plik << "Kwota: " << suma << endl;
+		if (z.isVip) plik << "Zamowienie VIP";
+		plik.close();
+	} cout << "Rachunek zapisano do pliku " << filename << endl;
+	
+	gotoweZamowienia.erase(numerStolika);
+	sala[r - 1][k - 1] = false;
 }

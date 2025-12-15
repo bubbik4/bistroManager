@@ -1,4 +1,6 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS // ctime robi³o jakis dziwny blad
+// a to go podobno ucisza, dziala prawidlowo nie usuwac
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -7,6 +9,8 @@
 #include <stack>
 #include <chrono>
 #include <thread>
+#include <fstream>
+#include <iomanip>
 
 #include "Menu.h"
 using namespace std;
@@ -32,11 +36,14 @@ class BistroManager {
 	map<int, Zamowienie> gotoweZamowienia;
 	int licznikZamowien;
 
+	//prywatna metoda pomocnicza
+	long long silnia(int n);
+
 public:
 	void pokazSale();
 	void dodaZamowienie();
 	void panelKuchni();
-	//void wystawRachunek();
+	void wystawRachunek();
 
 	BistroManager();
 	~BistroManager();
