@@ -18,12 +18,35 @@ BistroManager::BistroManager() { //ctor
 		}
 	}
 	licznikZamowien = 1;
+	zaladujMenu();
 }
 
 BistroManager::~BistroManager() { //dtor
 	for (auto const& item : menu) {
 		delete item.second;
 	}
+}
+
+long long BistroManager::silnia(int n) {
+	if (n <= 1) return 1;
+	return n * silnia(n - 1);
+}
+
+void BistroManager::zaladujMenu() {
+
+	// nazwa, cena, czasPrzygotowania
+
+	menu[1] = new DanieGlowne("Schabowy", 25.0, 5);
+	menu[2] = new DanieGlowne("Spaghetti", 20.0, 5);
+	menu[3] = new DanieGlowne("Pizza", 30.0, 6);
+	menu[4] = new DanieGlowne("Pierogi", 15.0, 4);
+
+	// nazwa, cena, czasPrzygotowania, lód(t/f)
+	menu[5] = new Napoj("Lemoniada", 12.0, 1, 1); 
+	menu[6] = new Napoj("Kawa", 14.0, 2, 0);
+	menu[7] = new Napoj("Herbata", 12.0, 2, 0);
+
+	cout << "menu zaladowane\n";
 }
 
 void BistroManager::pokazSale() {
@@ -141,11 +164,6 @@ void BistroManager::panelKuchni() {
 	gotoweZamowienia[doRealizacji.numerStolika] = doRealizacji;
 	cout << "Zamowienie dla stolika " << doRealizacji.numerStolika << " jest gotowe!";
 
-}
-
-long long BistroManager::silnia(int n) {
-	if (n <= 1) return 1;
-	return n * silnia(n - 1);
 }
 
 void BistroManager::wystawRachunek() {

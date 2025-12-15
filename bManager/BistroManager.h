@@ -36,8 +36,9 @@ class BistroManager {
 	map<int, Zamowienie> gotoweZamowienia;
 	int licznikZamowien;
 
-	//prywatna metoda pomocnicza
+	//prywatna metody pomocnicze
 	long long silnia(int n);
+	void zaladujMenu();
 
 public:
 	void pokazSale();
