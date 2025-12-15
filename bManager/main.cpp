@@ -1,7 +1,9 @@
 #include <iostream>
+#include "BistroManager.h"
 
 using namespace std;
 
 int main() {
-	cout << "...|";
+	BistroManager bm;
+	bm.pokazSale();
 }

@@ -3,8 +3,11 @@
 #include <vector>
 #include <queue>
 #include <map>
+#include <string>
+#include <stack>
 
 #include "Menu.h"
+using namespace std;
 
 struct Zamowienie {
 	int id;
@@ -20,16 +23,17 @@ struct Zamowienie {
 class BistroManager {
 	map<int, PozycjaMenu*> menu;
 	bool sala[5][5];
-	queue<Zamowienie> normalneZamowienie;
-	priority_queue<Zamowienie> vipZamowienie;
+	queue<Zamowienie> normalneZamowienia;
+	priority_queue<Zamowienie> vipZamowienia;
 
 	map<int, Zamowienie> gotoweZamowienia;
-	
+	int licznikZamowien;
+
 public:
 	void pokazSale();
 	void dodaZamowienie();
-	void panelKuchni();
-	void wystawRachunek();
+	//void panelKuchni();
+	//void wystawRachunek();
 
 	BistroManager();
 	~BistroManager();
