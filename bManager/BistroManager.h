@@ -5,9 +5,12 @@
 #include <map>
 #include <string>
 #include <stack>
+#include <chrono>
+#include <thread>
 
 #include "Menu.h"
 using namespace std;
+using namespace std::chrono;
 
 struct Zamowienie {
 	int id;
@@ -32,7 +35,7 @@ class BistroManager {
 public:
 	void pokazSale();
 	void dodaZamowienie();
-	//void panelKuchni();
+	void panelKuchni();
 	//void wystawRachunek();
 
 	BistroManager();
