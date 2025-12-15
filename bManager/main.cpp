@@ -31,7 +31,7 @@ int main() {
 			bm.pokazSale();
 			break;
 		case 2:
-			bm.dodaZamowienie();
+			bm.dodajZamowienie();
 			break;
 		case 3:
 			bm.panelKuchni();
@@ -46,5 +46,5 @@ int main() {
 			cout << "Nieprawidlowy wybor\n";
 		}
 	} while (choice!=0);
-	return 0;
+	return 52;
 }

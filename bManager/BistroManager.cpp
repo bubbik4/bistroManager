@@ -63,7 +63,7 @@ void BistroManager::pokazSale() {
 }
 
 
-void BistroManager::dodaZamowienie() { 
+void BistroManager::dodajZamowienie() { 
 	int r, k; // rz¹d, kolumna
 	cout << "Podaj numer stolika (1-5)\nRzad: ";
 	cin >> r;

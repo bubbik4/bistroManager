@@ -42,7 +42,7 @@ class BistroManager {
 
 public:
 	void pokazSale();
-	void dodaZamowienie();
+	void dodajZamowienie();
 	void panelKuchni();
 	void wystawRachunek();
 
