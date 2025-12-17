@@ -34,6 +34,12 @@ long long BistroManager::silnia(int n) {
 
 void BistroManager::zaladujMenu() {
 
+	// minus tego podejœcia - menu jest statyczne,
+	// tj. jkabym chcia³ dodaæ inny typ dania, 
+	// to muszê go tu wpisaæ. 
+	// Mo¿na by to zrobiæ inaczej - wczytuj¹c menu z pliku, 
+	// ale tak tez jest git.
+
 	// nazwa, cena, czasPrzygotowania
 
 	menu[1] = new DanieGlowne("Schabowy", 25.0, 5);
@@ -45,6 +51,16 @@ void BistroManager::zaladujMenu() {
 	menu[5] = new Napoj("Lemoniada", 12.0, 1, 1); 
 	menu[6] = new Napoj("Kawa", 14.0, 2, 0);
 	menu[7] = new Napoj("Herbata", 12.0, 2, 0);
+
+	//	dziêki temu, 
+	//	¿e BistroManager operuje na wskaŸnikach 
+	//	do klasy abstrakcyjnej PozycjaMenu, 
+	//	dodanie nowej kategorii, takiej jak Deser, 
+	//	wymaga³o tylko stworzenia nowej klasy.
+	//	Nie musia³em przepisywaæ logiki w wystawRachunek 
+	//	ani panelKuchni – one automatycznie obs³u¿y³y nowy typ dania
+	menu[8] = new Deser("Lody", 10.0, 3);
+	menu[9] = new Deser("Sernik", 7.0, 1);
 
 	cout << "menu zaladowane\n";
 }
@@ -88,10 +104,11 @@ void BistroManager::dodajZamowienie() {
 
 	stack<PozycjaMenu*> stosWyboru; // stack, aby daæ mo¿liwoœæ cofania wyboru
 
+	cout << "MENU:\n";
 	for (auto const& item : menu) { 
 		cout << item.first << ". ";
 		item.second->wyswietl(); // dziêki polimorfizmowi, mo¿na wyœwietliæ ca³e menu
-		cout << endl;
+		//cout << endl; // wyswietl() w kazdej implementacji juz ma '\n'
 	}
 
 	int wybor;  //usr in
@@ -123,7 +140,7 @@ void BistroManager::dodajZamowienie() {
 		} else cout << "Nieprawidlowe ID.\n";
 	}
 
-	// Przerzucanie ze stacka do klasy
+	// Przerzucanie wyborów usr ze stacka do struct
 	while (!stosWyboru.empty()) { // je¿eli cokolwiek jest w stacku
 		nowe.listaPozycji.push_back(stosWyboru.top());  // przypisz iloœæ pozycji do zamowienia
 		stosWyboru.pop(); // usun je ze stacka
@@ -135,7 +152,7 @@ void BistroManager::dodajZamowienie() {
 	}
 
 	char vip;
-	cout << "Czy jest to zamowienie VIP? [t/n]";
+	cout << "Czy jest to zamowienie VIP? [t/n] ";
 	cin >> vip;
 	nowe.isVip = (vip == 't' || vip == 'T'); // zwraca true jezeli wpiszesz t albo T
 
@@ -182,7 +199,7 @@ void BistroManager::wystawRachunek() {
 	int r, k; // rz¹d, kolumna
 	cout << "Podaj numer stolika (1-5)\nRzad: ";
 	cin >> r;
-	cout << "\nKolumna: ";
+	cout << "Kolumna: ";
 	cin >> k;
 
 	if (r < 1 || r > 5 || k < 1 || k > 5) {

@@ -19,3 +19,10 @@ Napoj::Napoj(string n, double c, int t, bool i)
 void Napoj::wyswietl() const {
 	cout << "[NAPOJ] " << nazwa << " " << (zLodem ? "z lodem | " : "| ") << cena << " PLN" << endl;
 }
+
+Deser::Deser(string n, double c, int t)
+	: PozycjaMenu(n, c, t) {}
+
+void Deser::wyswietl() const {
+	cout << "[DESER] " << nazwa << " | " << cena << " PLN\n";
+}

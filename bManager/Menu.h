@@ -38,3 +38,20 @@ public:
 	Napoj(string n, double c, int t, bool i = false);
 	virtual void wyswietl() const override;
 };
+
+
+// dziêki wykorzystaniu polimorfizmu
+// mogê dodaæ inne pozycje w menu,
+// np. Deser.
+//	W³aœnie dziêki temu, 
+//	¿e BistroManager operuje na wskaŸnikach 
+//	do klasy abstrakcyjnej PozycjaMenu, 
+//	dodanie nowej kategorii, takiej jak Deser, 
+//	wymaga³o tylko stworzenia nowej klasy.
+//	Nie musia³em przepisywaæ logiki w wystawRachunek 
+//	ani panelKuchni – one automatycznie obs³u¿y³y nowy typ dania
+class Deser : public PozycjaMenu {
+public:
+	Deser(string n, double c, int t);
+	virtual void wyswietl() const override;
+};
